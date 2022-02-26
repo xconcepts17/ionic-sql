@@ -1,0 +1,7 @@
+{
+  "name": "ionic-sql",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

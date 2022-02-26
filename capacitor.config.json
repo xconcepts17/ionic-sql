@@ -1,0 +1,6 @@
+{
+  "appId": "io.ionicsql.com",
+  "appName": "ionic-sql",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
