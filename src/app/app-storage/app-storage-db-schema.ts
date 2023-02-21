@@ -1,8 +1,9 @@
 export const sqlDB = {
-  database: 'ionic-sql',
+  database: 'ionic-sqlv2',
   version: 1,
   encrypted: true,
   mode: 'secret',
+  secretPhrase: 'SQL$2017'
 }
 
 export const dbschema: string = `

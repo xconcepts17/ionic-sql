@@ -61,6 +61,11 @@ export class AppStorageService {
                 }
             }
             try {
+                const isSet = await this.isPassPhrase();
+                if (!isSet.result) {
+                    await this.setEncryptionSecret();
+                }
+
                 let dbAvailable = await this.isDatabase();
                 // console.log(dbAvailable);
                 if (!dbAvailable.result) {
@@ -75,6 +80,32 @@ export class AppStorageService {
             }
 
         });
+    }
+
+
+    // passphrase available
+    async isPassPhrase(): Promise<capSQLiteResult> {
+        if (this.sqlite != null) {
+            try {
+                return Promise.resolve(await this.sqlite.isSecretStored());
+            } catch (err) {
+                return Promise.reject(new Error(err));
+            }
+        } else {
+            return Promise.reject(new Error(`no connection open`));
+        }
+    }
+    // set encryption passphrase
+    async setEncryptionSecret(): Promise<void> {
+        if (this.sqlite != null) {
+            try {
+                await this.sqlite.setEncryptionSecret(sqlDB.secretPhrase);
+            } catch (err) {
+                return Promise.reject(new Error(err));
+            }
+        } else {
+            return Promise.reject(new Error(`no connection open`));
+        }
     }
 
     // web
@@ -294,5 +325,13 @@ export class AppStorageService {
 
     logger(val: any) {
         console.log(val);
+    }
+
+    eraseDeviseData() {
+        return new Promise(async (resolve) => {
+            let deleteQry = 'DELETE FROM app_data; DELETE FROM offline_login;';
+            let qryResponse = await this.proccessQuery(deleteQry, 'query');
+            return resolve(null);
+        });
     }
 }

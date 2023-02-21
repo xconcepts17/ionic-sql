@@ -7,10 +7,45 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="ion-padding"></div>
-  <div class="ion-text-center">
-    <ion-button (click)="addDummyData()">Add Dummy Data</ion-button>
-  </div>
-  <div class="ion-padding"></div>
+  <ion-list>
+    <ion-list-header>DB Check</ion-list-header>
+    <ion-item>
+      <div>
+        <div>Initialize DB</div>
+        <ion-button (click)="storage.init()">Initialize DB</ion-button>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div>
+        <div>Insert Data</div>
+        <ion-button (click)="demoInsert()">Insert</ion-button>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div>
+        <div>Insert Data</div>
+        <ion-button (click)="demoGet()">Get Data</ion-button>
+      </div>
+      {{demoData | json}}
+    </ion-item>
+    <ion-item>
+      <div>
+        <div>Insert Data</div>
+        <ion-button (click)="demoDelete()">Delete Data</ion-button>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div>
+        <div>Connect Database</div>
+        <ion-button (click)="storage.connectDb()">Connect Database</ion-button>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div>
+        <div>Delete Database</div>
+        <ion-button (click)="storage.deleteDatabase()">Delete All Database</ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
